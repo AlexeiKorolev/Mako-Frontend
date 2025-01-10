@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { testPatent } from '../logic/APICalls';
 import '../styling/style.css';
 
 const LandingPage = () => {
@@ -20,12 +21,17 @@ const LandingPage = () => {
     }
   };
 
-
   return (
     <div className="landing">
       <img src="logo.jpg" alt="Logo" className="logo" />
       <h1 className="title">Mako Intelligence</h1>
-      <button className="get-started-btn" onClick={handleGetStartedClick}>Get Started</button>
+      <button
+        className="get-started-btn"
+        onClick={() => testPatent(`Meeting Notes: Vehicle Ecosystem Patent
+Primary Objective: Develop a vehicle ecosystem that integrates physical and mental comfort...`)}
+      >
+        Get Started
+      </button>
     </div>
   );
 };
