@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import LandingPage from './LandingPage';
-import AppPage from './AppPage';
+import LandingPage from './pages/LandingPage';
+import AppPage from './pages/AppPage';
 
 const App = () => {
   return (

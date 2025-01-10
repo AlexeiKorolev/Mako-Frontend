@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './styling/style.css';
-import './styling/app.css';
+import '../styling/style.css';
+import '../styling/app.css';
 
 const AppPage = () => {
   const [activeTab, setActiveTab] = useState(1);
@@ -9,7 +9,7 @@ const AppPage = () => {
     setActiveTab(tab);
   };
 
-  
+
 
   return (
     <div className="AppPage">
