@@ -1,0 +1,386 @@
+.tab-container {
+    display: flex;
+    width: 100%;
+    height: 60px;
+  }
+  
+  .tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: bold;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .tab:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .tab::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -15px;
+    width: 0;
+    height: 0;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+    border-left: 15px solid #f0f0f0;
+    z-index: 1;
+    transition: border-left-color 0.3s;
+  }
+  
+  .tab:last-child::after {
+    display: none;
+  }
+  
+  .tab:hover::after {
+    border-left-color: #e0e0e0;
+  }
+  
+  .tab.active {
+    background-color: #004896;
+    color: white;
+  }
+  
+  .tab.active::after {
+    border-left-color: #004896;
+  }
+  
+  .screen1 .header {
+    text-align: center;
+    width: 100vw;
+    font-size: 4vh;
+    color: white;
+    padding-top: 4vh;
+  }
+  .screen1 #selectFilesBtn {
+    left: 35vw;
+  }
+  .screen1 #selectFolderBtn {
+    right: 35vw;
+  }
+  .screen1 #fileList {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 400px;
+  }
+  .screen1 .upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .screen1 button {
+    padding: 1vw 1.5vw;
+    font-size: 16px;
+    cursor: pointer;
+    transform: translate(0%, 0%) !important;
+  }
+  .screen1 #notes {
+    top: 40vh;
+    position: absolute;
+    width: 80vw;
+    margin-left: 10vw;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    height: 20vh;
+    resize: none; /* Allow vertical resizing */
+  }
+  .screen1 .continueBtn {
+    position: absolute;
+    transform: translate(-50%, -50%) !important;
+    left: 50vw;
+    top: 80vh;
+  }
+  
+  #screen2 #notes {
+    top: 40vh;
+    position: absolute;
+    width: 40vw;
+    margin-left: 30vw;
+    padding: 10px;
+    padding-bottom: 0px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    height: 30vh;
+    resize: none; /* Allow vertical resizing */
+  }
+  #screen2 .sidebar {
+    border-radius: 20px;
+    height: 50vh;
+    margin-top: 10vh;
+    margin-left: 10vw;
+    width: 250px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  #screen2 .sidebar h2 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  #screen2 #sectionsList {
+    list-style-type: none;
+    padding: 0;
+  }
+  #screen2 #sectionsList li {
+    padding: 10px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  #screen2 #sectionsList li:hover {
+    background-color: #e0e0e0;
+  }
+  #screen2 .main-content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  .disabled {
+    display: none;
+  }
+  
+  .review-notes-container {
+    width: 80vw;
+    min-width: 400px;
+    margin: 0 auto;
+    margin-top: 30px;
+    height: 80vh;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+  }
+  
+  .review-notes-container h2 {
+    text-align: center;
+    color: #004896;
+    margin-bottom: 20px;
+  }
+  
+  .scrolling-frame {
+    height: 80%;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: white;
+  }
+  
+  .question-answer {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .question-answer:last-child {
+    border-bottom: none;
+  }
+  
+  .question-answer h3 {
+    color: #004896;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .answer-container {
+    width: 100%;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .answer-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+    color: #333;
+    resize: vertical;
+    min-height: 60px;
+    font-family: "Nato Sans", sans-serif;
+  }
+  
+  .answer-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #007bff;
+  }
+  
+  .section-break {
+    height: 1px;
+    background-color: #ccc;
+    margin: 30px 0;
+  }
+  
+  /* Styling the scrollbar */
+  .scrolling-frame::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .scrolling-frame::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  .scrolling-frame::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+  
+  .scrolling-frame::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  .question-answer .question {
+    font-weight: bold;
+    color: #004896;
+    margin-bottom: 5px;
+  }
+  
+  .question-answer .answer {
+    margin-left: 20px;
+    color: #333;
+  }
+  
+  .claims-container {
+    display: flex;
+    height: calc(100vh - 150px);
+    margin-top: 20px;
+  }
+  
+  .claims-tree {
+    width: 30%;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .claims-list {
+    width: 70%;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 0 10px 10px 0;
+  }
+  
+  #claimsTree {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  #claimsTree ul {
+    padding-left: 20px;
+  }
+  
+  #claimsTree li {
+    margin: 10px 0;
+    cursor: pointer;
+  }
+  
+  #claimsTree li:hover {
+    color: #007bff;
+  }
+  
+  #claimsList .claim {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+  
+  #claimsList .claim h3 {
+    margin-top: 0;
+    color: #004896;
+  }
+  
+  #claimsList .claim p {
+    margin-bottom: 0;
+  }
+  
+  .show-all-btn {
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    margin-top: 70vh;
+    margin-left: -90px;
+    background-color: #004896;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    align-self: flex-start;
+  }
+  
+  .show-all-btn:hover {
+    background-color: #003366;
+  }
+  
+  #claimsTree {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 0;
+  }
+  
+  .draft-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .download-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #004896;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .download-btn:hover {
+    background-color: #003366;
+  }
+  
+  #pdfViewer {
+    width: 80%;
+    height: 600px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #004896;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 10px;
+  }
+  
+  .btn:hover {
+    background-color: #003366;
+  }
+  
+  #uploadStatus {
+    margin-top: 10px;
+    font-weight: bold;
+  }/*# sourceMappingURL=app.css.map */

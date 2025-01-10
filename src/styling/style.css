@@ -1,0 +1,83 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; /* Prevents scrolling */
+    background-color: #007bff;
+    font-family: "Nato Sans", sans-serif;
+  }
+  
+  .landing {
+    background-color: #007bff;
+    height: 100vh; /* 100% of the viewport height */
+    width: 100vw; /* 100% of the viewport width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    overflow: hidden;
+  }
+  
+  .logo {
+    position: absolute;
+    top: 20vh;
+    width: 200px;
+    margin-bottom: 30px;
+    border-radius: 100%;
+  }
+  
+  .title {
+    position: absolute;
+    top: 40vh;
+    font-family: "Nato Sans", sans-serif;
+    color: white;
+    font-size: 3.5vw;
+  }
+  
+  button {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    color: #007bff;
+    border: none;
+    padding-top: 2.5vh;
+    padding-bottom: 2.5vh;
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
+    font-size: 2vw;
+    border-radius: 50px;
+    transition: background-color 0.3s, color 0.3s, padding 0.3s, font-size 0.3s, top 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    color: white;
+  }
+  
+  .get-started-btn {
+    animation: float 3s ease-in-out infinite;
+    top: 60vh;
+    font-family: "Nato Sans", sans-serif;
+  }
+  
+  .get-started-btn:hover {
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    font-size: 2.5vw;
+    top: 58vh;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }/*# sourceMappingURL=style.css.map */
