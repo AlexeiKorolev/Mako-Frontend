@@ -1,15 +1,73 @@
 import React, { useState } from 'react';
 import '../styling/style.css';
 import '../styling/app.css';
+import { testPatent } from '../logic/APICalls';
 
 const AppPage = () => {
   const [activeTab, setActiveTab] = useState(1);
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [questions, setQuestions] = useState('');
 
   const updateTabs = (tab) => {
     setActiveTab(tab);
   };
 
+  const handleFileSelection = (event) => {
+    const newFiles = Array.from(event.target.files).map(file => ({
+      id: Math.random().toString(36).substr(2, 9),
+      file: file,
+      type: 'file'
+    }));
+    setSelectedFiles(prev => [...prev, ...newFiles]);
+  };
 
+  const handleFolderSelection = (event) => {
+    const newFiles = Array.from(event.target.files).map(file => ({
+      id: Math.random().toString(36).substr(2, 9),
+      file: file,
+      type: 'folder'
+    }));
+    setSelectedFiles(prev => [...prev, ...newFiles]);
+  };
+
+  const handleAudioSelection = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'audio/*';
+    input.onchange = (e) => {
+      const newFiles = Array.from(e.target.files).map(file => ({
+        id: Math.random().toString(36).substr(2, 9),
+        file: file,
+        type: 'audio'
+      }));
+      setSelectedFiles(prev => [...prev, ...newFiles]);
+    };
+    input.click();
+  };
+
+  const removeFile = (fileId) => {
+    setSelectedFiles(prev => prev.filter(file => file.id !== fileId));
+  };
+
+
+  const processNotes = async () => {
+    // Get the notes from textarea
+    const notesText = document.getElementById('notes').value;
+    const files = selectedFiles;
+
+    // Basic validation
+    if (!notesText.trim() && files.length === 0) {
+      alert('Please enter some notes or upload files before continuing');
+      return;
+    }
+
+    // call API to get questions. TODO: upload files
+    const questions = await testPatent(notesText);
+    setQuestions(questions);
+
+    // If validation passes, proceed to next tab
+    updateTabs(2);
+  };
 
   return (
     <div className="AppPage">
@@ -24,15 +82,47 @@ const AppPage = () => {
         <div id="screen1" className="screen1">
           <p className="header">Paste, type, upload, or drag in your notes</p>
           <div className="upload-container">
-            <input type="file" id="fileInput" multiple style={{ display: 'none' }} />
-            <input type="file" id="folderInput" webkitdirectory="true" directory="true" multiple style={{ display: 'none' }} />
-            <button id="selectFilesBtn">Upload Files</button>
-            <button id="selectFolderBtn">Upload Folder</button>
-            <button id="uploadBtn" disabled>Upload Audio</button>
-            <div id="fileList"></div>
+            <input
+              type="file"
+              id="fileInput"
+              multiple
+              style={{ display: 'none' }}
+              onChange={handleFileSelection}
+            />
+            <input
+              type="file"
+              id="folderInput"
+              webkitdirectory="true"
+              directory="true"
+              multiple
+              style={{ display: 'none' }}
+              onChange={handleFolderSelection}
+            />
+            <button id="selectFilesBtn" onClick={() => document.getElementById('fileInput').click()}>
+              Upload Files
+            </button>
+            <button id="selectFolderBtn" onClick={() => document.getElementById('folderInput').click()}>
+              Upload Folder
+            </button>
+            <button id="uploadBtn" onClick={handleAudioSelection}>
+              Upload Audio
+            </button>
+            <div id="fileList" className="file-list">
+              {selectedFiles.map(file => (
+                <div key={file.id} className="file-item">
+                  <span>{file.file.name}</span>
+                  <button
+                    className="remove-file"
+                    onClick={() => removeFile(file.id)}
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
           <textarea id="notes" placeholder="Write your notes here..." rows="10" cols="50"></textarea>
-          <button className="continueBtn" onClick={() => updateTabs(2)}>Continue</button>
+          <button className="continueBtn" onClick={processNotes}>Continue</button>
         </div>
       )}
 
