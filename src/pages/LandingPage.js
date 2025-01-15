@@ -1,29 +1,26 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styling/style.css';
 
 const LandingPage = () => {
   const navigate = useNavigate();
 
   const handleGetStartedClick = async () => {
-    // TODO: Implement sign in
     navigate('/app');
   };
 
   return (
-    <div className="landing">
-      <img src="logo.jpg" alt="Logo" className="logo" />
-      <h1 className="title">Mako Intelligence</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#007bff] to-black">
+      <h1 className="text-6xl font-bold text-white mb-20 text-center">
+        Mako Intelligence
+      </h1>
       <button
-        className="get-started-btn"
-        onClick={() => handleGetStartedClick()}
+        className="px-8 py-4 text-lg font-semibold bg-white text-black rounded-full shadow-md hover:shadow-lg transition-shadow animate-levitate"
+        onClick={handleGetStartedClick}
       >
         Get Started
       </button>
     </div>
   );
 };
-
-// () => window.location.href = 'app'
 
 export default LandingPage;
