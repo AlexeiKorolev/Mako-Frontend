@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Mako-Frontend/static/css/main.ed6dad02.css",
-    "main.js": "/Mako-Frontend/static/js/main.3d56f8ad.js",
+    "main.js": "/Mako-Frontend/static/js/main.945d7943.js",
     "index.html": "/Mako-Frontend/index.html",
     "main.ed6dad02.css.map": "/Mako-Frontend/static/css/main.ed6dad02.css.map",
-    "main.3d56f8ad.js.map": "/Mako-Frontend/static/js/main.3d56f8ad.js.map"
+    "main.945d7943.js.map": "/Mako-Frontend/static/js/main.945d7943.js.map"
   },
   "entrypoints": [
     "static/css/main.ed6dad02.css",
-    "static/js/main.3d56f8ad.js"
+    "static/js/main.945d7943.js"
   ]
 }
