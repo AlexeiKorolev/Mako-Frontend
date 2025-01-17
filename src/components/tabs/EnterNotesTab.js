@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useGlobal } from '../../context/GlobalContext';
 import { testPatent } from '../../logic/APICalls';
 
 export default function EnterNotesTab() {
     const { notes, setNotes, files, setFiles, setActiveTab, setQuestions } = useGlobal();
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleFileSelect = (e) => {
         const newFiles = Array.from(e.target.files);
@@ -25,14 +26,15 @@ export default function EnterNotesTab() {
     };
 
     const goToNotesReview = async () => {
+        setIsLoading(true);
         try {
-            // Pass setQuestions from the global context
             await testPatent(notes, setQuestions);
-            // If successful, switch to the Review Notes tab
             setActiveTab("Review Notes");
         } catch (error) {
             console.error('Error analyzing notes:', error);
             alert('Failed to analyze notes. Please try again.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -119,9 +121,14 @@ export default function EnterNotesTab() {
                 {/* Continue Button */}
                 <button
                     onClick={() => goToNotesReview()}
-                    className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 text-lg font-semibold mb-[250px]"
+                    disabled={isLoading}
+                    className={`px-6 py-3 bg-blue-600 text-white rounded-lg shadow text-lg font-semibold mb-[250px] ${
+                        isLoading 
+                            ? 'opacity-50 cursor-not-allowed'
+                            : 'hover:bg-blue-700'
+                    }`}
                 >
-                    Continue
+                    {isLoading ? 'Processing...' : 'Continue'}
                 </button>
             </div>
         </div>
