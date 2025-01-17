@@ -1,8 +1,9 @@
 import React from 'react';
 import { useGlobal } from '../../context/GlobalContext';
+import { testPatent } from '../../logic/APICalls';
 
 export default function EnterNotesTab() {
-    const { notes, setNotes, files, setFiles } = useGlobal();
+    const { notes, setNotes, files, setFiles, setActiveTab, setQuestions } = useGlobal();
 
     const handleFileSelect = (e) => {
         const newFiles = Array.from(e.target.files);
@@ -21,6 +22,18 @@ export default function EnterNotesTab() {
 
     const removeFile = (indexToRemove) => {
         setFiles(prev => prev.filter((_, index) => index !== indexToRemove));
+    };
+
+    const goToNotesReview = async () => {
+        try {
+            // Pass setQuestions from the global context
+            await testPatent(notes, setQuestions);
+            // If successful, switch to the Review Notes tab
+            setActiveTab("Review Notes");
+        } catch (error) {
+            console.error('Error analyzing notes:', error);
+            alert('Failed to analyze notes. Please try again.');
+        }
     };
 
     return (
@@ -104,7 +117,10 @@ export default function EnterNotesTab() {
                 ></textarea>
 
                 {/* Continue Button */}
-                <button className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 text-lg font-semibold mb-[250px]">
+                <button
+                    onClick={() => goToNotesReview()}
+                    className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 text-lg font-semibold mb-[250px]"
+                >
                     Continue
                 </button>
             </div>

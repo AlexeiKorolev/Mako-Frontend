@@ -3,9 +3,10 @@ import EnterNotesTab from '../components/tabs/EnterNotesTab';
 import ReviewNotesTab from '../components/tabs/ReviewNotesTab';
 import ReviewClaimsTab from '../components/tabs/ReviewClaimsTab';
 import DraftTab from '../components/tabs/DraftTab';
+import { useGlobal } from '../context/GlobalContext';
 
 export default function NotesPage() {
-  const [activeTab, setActiveTab] = useState("Enter Notes");
+  const { activeTab, setActiveTab } = useGlobal();
 
   const tabs = ["Enter Notes", "Review Notes", "Review Claims", "Draft!"];
 
